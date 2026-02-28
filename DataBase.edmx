@@ -1,0 +1,1112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ChemicalWarehouseDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HazardClasses">
+          <Key>
+            <PropertyRef Name="HazardClassID" />
+          </Key>
+          <Property Name="HazardClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="PrecautionaryMeasures" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ReagentBatches">
+          <Key>
+            <PropertyRef Name="BatchID" />
+          </Key>
+          <Property Name="BatchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReagentID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="ArrivalDate" Type="date" Nullable="false" />
+          <Property Name="ProductionDate" Type="date" />
+          <Property Name="ExpirationDate" Type="date" Nullable="false" />
+          <Property Name="Manufacturer" Type="nvarchar" MaxLength="200" />
+          <Property Name="CertificateNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="InitialQuantity" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="CurrentQuantity" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="IsAvailable" Type="bit" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Reagents">
+          <Key>
+            <PropertyRef Name="ReagentID" />
+          </Key>
+          <Property Name="ReagentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReagentCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReagentName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ChemicalFormula" Type="nvarchar" MaxLength="100" />
+          <Property Name="CASNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="HazardClassID" Type="int" />
+          <Property Name="UnitID" Type="int" Nullable="false" />
+          <Property Name="MinStockLevel" Type="decimal" Precision="10" Scale="3" />
+          <Property Name="MaxStockLevel" Type="decimal" Precision="10" Scale="3" />
+          <Property Name="StorageTemperature" Type="nvarchar" MaxLength="50" />
+          <Property Name="StorageConditions" Type="nvarchar" MaxLength="500" />
+          <Property Name="IncompatibleWith" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ReagentTypes">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="StorageRequirements" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="StorageLocations">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZoneID" Type="int" Nullable="false" />
+          <Property Name="ShelfNumber" Type="int" />
+          <Property Name="CellNumber" Type="int" />
+          <Property Name="MaxWeight" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MaxVolume" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IsOccupied" Type="bit" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="INN" Type="nvarchar" MaxLength="20" />
+          <Property Name="KPP" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="UnitsOfMeasure">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnitName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UnitSymbol" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsBaseUnit" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastLoginDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WarehouseOperations">
+          <Key>
+            <PropertyRef Name="OperationID" />
+          </Key>
+          <Property Name="OperationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperationType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DocumentNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="BatchID" Type="int" />
+          <Property Name="ReagentID" Type="int" />
+          <Property Name="Quantity" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="UnitID" Type="int" Nullable="false" />
+          <Property Name="FromLocationID" Type="int" />
+          <Property Name="ToLocationID" Type="int" />
+          <Property Name="OperationDate" Type="datetime" Nullable="false" />
+          <Property Name="PerformedBy" Type="int" Nullable="false" />
+          <Property Name="RecipientDepartmentID" Type="int" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="500" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="WarehouseZones">
+          <Key>
+            <PropertyRef Name="ZoneID" />
+          </Key>
+          <Property Name="ZoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZoneCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ZoneName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="TemperatureControl" Type="bit" />
+          <Property Name="MinTemperature" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="MaxTemperature" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="HumidityControl" Type="bit" />
+        </EntityType>
+        <Association Name="FK__ReagentBa__Locat__76969D2E">
+          <End Role="StorageLocations" Type="Self.StorageLocations" Multiplicity="0..1" />
+          <End Role="ReagentBatches" Type="Self.ReagentBatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageLocations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="ReagentBatches">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReagentBa__Reage__74AE54BC">
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="1" />
+          <End Role="ReagentBatches" Type="Self.ReagentBatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reagents">
+              <PropertyRef Name="ReagentID" />
+            </Principal>
+            <Dependent Role="ReagentBatches">
+              <PropertyRef Name="ReagentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReagentBa__Suppl__75A278F5">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="ReagentBatches" Type="Self.ReagentBatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="ReagentBatches">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reagents__Hazard__656C112C">
+          <End Role="HazardClasses" Type="Self.HazardClasses" Multiplicity="0..1" />
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HazardClasses">
+              <PropertyRef Name="HazardClassID" />
+            </Principal>
+            <Dependent Role="Reagents">
+              <PropertyRef Name="HazardClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reagents__TypeID__6477ECF3">
+          <End Role="ReagentTypes" Type="Self.ReagentTypes" Multiplicity="1" />
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReagentTypes">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Reagents">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reagents__UnitID__66603565">
+          <End Role="UnitsOfMeasure" Type="Self.UnitsOfMeasure" Multiplicity="1" />
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitsOfMeasure">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="Reagents">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StorageLo__ZoneI__6FE99F9F">
+          <End Role="WarehouseZones" Type="Self.WarehouseZones" Multiplicity="1" />
+          <End Role="StorageLocations" Type="Self.StorageLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WarehouseZones">
+              <PropertyRef Name="ZoneID" />
+            </Principal>
+            <Dependent Role="StorageLocations">
+              <PropertyRef Name="ZoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__Departmen__5BE2A6F2">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__5AEE82B9">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Batch__7B5B524B">
+          <End Role="ReagentBatches" Type="Self.ReagentBatches" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReagentBatches">
+              <PropertyRef Name="BatchID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__FromL__7E37BEF6">
+          <End Role="StorageLocations" Type="Self.StorageLocations" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageLocations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="FromLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Perfo__00200768">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="PerformedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Reage__7C4F7684">
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reagents">
+              <PropertyRef Name="ReagentID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="ReagentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Recip__01142BA1">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="RecipientDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__ToLoc__7F2BE32F">
+          <End Role="StorageLocations" Type="Self.StorageLocations" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageLocations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="ToLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__UnitI__7D439ABD">
+          <End Role="UnitsOfMeasure" Type="Self.UnitsOfMeasure" Multiplicity="1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitsOfMeasure">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ChemicalWarehouseDBModelContainer">
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HazardClasses" EntityType="Self.HazardClasses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReagentBatches" EntityType="Self.ReagentBatches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reagents" EntityType="Self.Reagents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReagentTypes" EntityType="Self.ReagentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StorageLocations" EntityType="Self.StorageLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitsOfMeasure" EntityType="Self.UnitsOfMeasure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarehouseOperations" EntityType="Self.WarehouseOperations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarehouseZones" EntityType="Self.WarehouseZones" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ReagentBa__Locat__76969D2E" Association="Self.FK__ReagentBa__Locat__76969D2E">
+            <End Role="StorageLocations" EntitySet="StorageLocations" />
+            <End Role="ReagentBatches" EntitySet="ReagentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReagentBa__Reage__74AE54BC" Association="Self.FK__ReagentBa__Reage__74AE54BC">
+            <End Role="Reagents" EntitySet="Reagents" />
+            <End Role="ReagentBatches" EntitySet="ReagentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReagentBa__Suppl__75A278F5" Association="Self.FK__ReagentBa__Suppl__75A278F5">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="ReagentBatches" EntitySet="ReagentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reagents__Hazard__656C112C" Association="Self.FK__Reagents__Hazard__656C112C">
+            <End Role="HazardClasses" EntitySet="HazardClasses" />
+            <End Role="Reagents" EntitySet="Reagents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reagents__TypeID__6477ECF3" Association="Self.FK__Reagents__TypeID__6477ECF3">
+            <End Role="ReagentTypes" EntitySet="ReagentTypes" />
+            <End Role="Reagents" EntitySet="Reagents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reagents__UnitID__66603565" Association="Self.FK__Reagents__UnitID__66603565">
+            <End Role="UnitsOfMeasure" EntitySet="UnitsOfMeasure" />
+            <End Role="Reagents" EntitySet="Reagents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StorageLo__ZoneI__6FE99F9F" Association="Self.FK__StorageLo__ZoneI__6FE99F9F">
+            <End Role="WarehouseZones" EntitySet="WarehouseZones" />
+            <End Role="StorageLocations" EntitySet="StorageLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__Departmen__5BE2A6F2" Association="Self.FK__Users__Departmen__5BE2A6F2">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__5AEE82B9" Association="Self.FK__Users__RoleID__5AEE82B9">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Batch__7B5B524B" Association="Self.FK__Warehouse__Batch__7B5B524B">
+            <End Role="ReagentBatches" EntitySet="ReagentBatches" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__FromL__7E37BEF6" Association="Self.FK__Warehouse__FromL__7E37BEF6">
+            <End Role="StorageLocations" EntitySet="StorageLocations" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Perfo__00200768" Association="Self.FK__Warehouse__Perfo__00200768">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Reage__7C4F7684" Association="Self.FK__Warehouse__Reage__7C4F7684">
+            <End Role="Reagents" EntitySet="Reagents" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Recip__01142BA1" Association="Self.FK__Warehouse__Recip__01142BA1">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__ToLoc__7F2BE32F" Association="Self.FK__Warehouse__ToLoc__7F2BE32F">
+            <End Role="StorageLocations" EntitySet="StorageLocations" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__UnitI__7D439ABD" Association="Self.FK__Warehouse__UnitI__7D439ABD">
+            <End Role="UnitsOfMeasure" EntitySet="UnitsOfMeasure" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChemicalWarehouseDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__Departmen__5BE2A6F2" FromRole="Departments" ToRole="Users" />
+          <NavigationProperty Name="WarehouseOperations" Relationship="Self.FK__Warehouse__Recip__01142BA1" FromRole="Departments" ToRole="WarehouseOperations" />
+        </EntityType>
+        <EntityType Name="HazardClasses">
+          <Key>
+            <PropertyRef Name="HazardClassID" />
+          </Key>
+          <Property Name="HazardClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PrecautionaryMeasures" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reagents" Relationship="Self.FK__Reagents__Hazard__656C112C" FromRole="HazardClasses" ToRole="Reagents" />
+        </EntityType>
+        <EntityType Name="ReagentBatches">
+          <Key>
+            <PropertyRef Name="BatchID" />
+          </Key>
+          <Property Name="BatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReagentID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ProductionDate" Type="DateTime" Precision="0" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Manufacturer" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CertificateNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InitialQuantity" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="CurrentQuantity" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StorageLocations" Relationship="Self.FK__ReagentBa__Locat__76969D2E" FromRole="ReagentBatches" ToRole="StorageLocations" />
+          <NavigationProperty Name="Reagents" Relationship="Self.FK__ReagentBa__Reage__74AE54BC" FromRole="ReagentBatches" ToRole="Reagents" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK__ReagentBa__Suppl__75A278F5" FromRole="ReagentBatches" ToRole="Suppliers" />
+          <NavigationProperty Name="WarehouseOperations" Relationship="Self.FK__Warehouse__Batch__7B5B524B" FromRole="ReagentBatches" ToRole="WarehouseOperations" />
+        </EntityType>
+        <EntityType Name="Reagents">
+          <Key>
+            <PropertyRef Name="ReagentID" />
+          </Key>
+          <Property Name="ReagentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReagentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReagentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChemicalFormula" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CASNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="HazardClassID" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="MinStockLevel" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="MaxStockLevel" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="StorageTemperature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StorageConditions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IncompatibleWith" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="HazardClasses" Relationship="Self.FK__Reagents__Hazard__656C112C" FromRole="Reagents" ToRole="HazardClasses" />
+          <NavigationProperty Name="ReagentBatches" Relationship="Self.FK__ReagentBa__Reage__74AE54BC" FromRole="Reagents" ToRole="ReagentBatches" />
+          <NavigationProperty Name="ReagentTypes" Relationship="Self.FK__Reagents__TypeID__6477ECF3" FromRole="Reagents" ToRole="ReagentTypes" />
+          <NavigationProperty Name="UnitsOfMeasure" Relationship="Self.FK__Reagents__UnitID__66603565" FromRole="Reagents" ToRole="UnitsOfMeasure" />
+          <NavigationProperty Name="WarehouseOperations" Relationship="Self.FK__Warehouse__Reage__7C4F7684" FromRole="Reagents" ToRole="WarehouseOperations" />
+        </EntityType>
+        <EntityType Name="ReagentTypes">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StorageRequirements" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reagents" Relationship="Self.FK__Reagents__TypeID__6477ECF3" FromRole="ReagentTypes" ToRole="Reagents" />
+        </EntityType>
+        <EntityType Name="StorageLocations">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZoneID" Type="Int32" Nullable="false" />
+          <Property Name="ShelfNumber" Type="Int32" />
+          <Property Name="CellNumber" Type="Int32" />
+          <Property Name="MaxWeight" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MaxVolume" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IsOccupied" Type="Boolean" />
+          <NavigationProperty Name="ReagentBatches" Relationship="Self.FK__ReagentBa__Locat__76969D2E" FromRole="StorageLocations" ToRole="ReagentBatches" />
+          <NavigationProperty Name="WarehouseZones" Relationship="Self.FK__StorageLo__ZoneI__6FE99F9F" FromRole="StorageLocations" ToRole="WarehouseZones" />
+          <NavigationProperty Name="WarehouseOperations" Relationship="Self.FK__Warehouse__FromL__7E37BEF6" FromRole="StorageLocations" ToRole="WarehouseOperations" />
+          <NavigationProperty Name="WarehouseOperations1" Relationship="Self.FK__Warehouse__ToLoc__7F2BE32F" FromRole="StorageLocations" ToRole="WarehouseOperations" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="INN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KPP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="ReagentBatches" Relationship="Self.FK__ReagentBa__Suppl__75A278F5" FromRole="Suppliers" ToRole="ReagentBatches" />
+        </EntityType>
+        <EntityType Name="UnitsOfMeasure">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnitName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitSymbol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsBaseUnit" Type="Boolean" />
+          <NavigationProperty Name="Reagents" Relationship="Self.FK__Reagents__UnitID__66603565" FromRole="UnitsOfMeasure" ToRole="Reagents" />
+          <NavigationProperty Name="WarehouseOperations" Relationship="Self.FK__Warehouse__UnitI__7D439ABD" FromRole="UnitsOfMeasure" ToRole="WarehouseOperations" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__5AEE82B9" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Users__Departmen__5BE2A6F2" FromRole="Users" ToRole="Departments" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK__Users__RoleID__5AEE82B9" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="WarehouseOperations" Relationship="Self.FK__Warehouse__Perfo__00200768" FromRole="Users" ToRole="WarehouseOperations" />
+        </EntityType>
+        <EntityType Name="WarehouseOperations">
+          <Key>
+            <PropertyRef Name="OperationID" />
+          </Key>
+          <Property Name="OperationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DocumentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BatchID" Type="Int32" />
+          <Property Name="ReagentID" Type="Int32" />
+          <Property Name="Quantity" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="FromLocationID" Type="Int32" />
+          <Property Name="ToLocationID" Type="Int32" />
+          <Property Name="OperationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PerformedBy" Type="Int32" Nullable="false" />
+          <Property Name="RecipientDepartmentID" Type="Int32" />
+          <Property Name="Purpose" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Warehouse__Recip__01142BA1" FromRole="WarehouseOperations" ToRole="Departments" />
+          <NavigationProperty Name="ReagentBatches" Relationship="Self.FK__Warehouse__Batch__7B5B524B" FromRole="WarehouseOperations" ToRole="ReagentBatches" />
+          <NavigationProperty Name="Reagents" Relationship="Self.FK__Warehouse__Reage__7C4F7684" FromRole="WarehouseOperations" ToRole="Reagents" />
+          <NavigationProperty Name="StorageLocations" Relationship="Self.FK__Warehouse__FromL__7E37BEF6" FromRole="WarehouseOperations" ToRole="StorageLocations" />
+          <NavigationProperty Name="StorageLocations1" Relationship="Self.FK__Warehouse__ToLoc__7F2BE32F" FromRole="WarehouseOperations" ToRole="StorageLocations" />
+          <NavigationProperty Name="UnitsOfMeasure" Relationship="Self.FK__Warehouse__UnitI__7D439ABD" FromRole="WarehouseOperations" ToRole="UnitsOfMeasure" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Warehouse__Perfo__00200768" FromRole="WarehouseOperations" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="WarehouseZones">
+          <Key>
+            <PropertyRef Name="ZoneID" />
+          </Key>
+          <Property Name="ZoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZoneCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZoneName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TemperatureControl" Type="Boolean" />
+          <Property Name="MinTemperature" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="MaxTemperature" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="HumidityControl" Type="Boolean" />
+          <NavigationProperty Name="StorageLocations" Relationship="Self.FK__StorageLo__ZoneI__6FE99F9F" FromRole="WarehouseZones" ToRole="StorageLocations" />
+        </EntityType>
+        <Association Name="FK__Users__Departmen__5BE2A6F2">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Recip__01142BA1">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="RecipientDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reagents__Hazard__656C112C">
+          <End Role="HazardClasses" Type="Self.HazardClasses" Multiplicity="0..1" />
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HazardClasses">
+              <PropertyRef Name="HazardClassID" />
+            </Principal>
+            <Dependent Role="Reagents">
+              <PropertyRef Name="HazardClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReagentBa__Locat__76969D2E">
+          <End Role="StorageLocations" Type="Self.StorageLocations" Multiplicity="0..1" />
+          <End Role="ReagentBatches" Type="Self.ReagentBatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageLocations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="ReagentBatches">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReagentBa__Reage__74AE54BC">
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="1" />
+          <End Role="ReagentBatches" Type="Self.ReagentBatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reagents">
+              <PropertyRef Name="ReagentID" />
+            </Principal>
+            <Dependent Role="ReagentBatches">
+              <PropertyRef Name="ReagentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReagentBa__Suppl__75A278F5">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="ReagentBatches" Type="Self.ReagentBatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="ReagentBatches">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Batch__7B5B524B">
+          <End Role="ReagentBatches" Type="Self.ReagentBatches" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReagentBatches">
+              <PropertyRef Name="BatchID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reagents__TypeID__6477ECF3">
+          <End Role="ReagentTypes" Type="Self.ReagentTypes" Multiplicity="1" />
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReagentTypes">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Reagents">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reagents__UnitID__66603565">
+          <End Role="UnitsOfMeasure" Type="Self.UnitsOfMeasure" Multiplicity="1" />
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitsOfMeasure">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="Reagents">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Reage__7C4F7684">
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reagents">
+              <PropertyRef Name="ReagentID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="ReagentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StorageLo__ZoneI__6FE99F9F">
+          <End Role="WarehouseZones" Type="Self.WarehouseZones" Multiplicity="1" />
+          <End Role="StorageLocations" Type="Self.StorageLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WarehouseZones">
+              <PropertyRef Name="ZoneID" />
+            </Principal>
+            <Dependent Role="StorageLocations">
+              <PropertyRef Name="ZoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__FromL__7E37BEF6">
+          <End Role="StorageLocations" Type="Self.StorageLocations" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageLocations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="FromLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__ToLoc__7F2BE32F">
+          <End Role="StorageLocations" Type="Self.StorageLocations" Multiplicity="0..1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageLocations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="ToLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__UnitI__7D439ABD">
+          <End Role="UnitsOfMeasure" Type="Self.UnitsOfMeasure" Multiplicity="1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitsOfMeasure">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__5AEE82B9">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Perfo__00200768">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="WarehouseOperations" Type="Self.WarehouseOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WarehouseOperations">
+              <PropertyRef Name="PerformedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChemicalWarehouseDBEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Departments" />
+          <EntitySet Name="HazardClasses" EntityType="Self.HazardClasses" />
+          <EntitySet Name="ReagentBatches" EntityType="Self.ReagentBatches" />
+          <EntitySet Name="Reagents" EntityType="Self.Reagents" />
+          <EntitySet Name="ReagentTypes" EntityType="Self.ReagentTypes" />
+          <EntitySet Name="StorageLocations" EntityType="Self.StorageLocations" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
+          <EntitySet Name="UnitsOfMeasure" EntityType="Self.UnitsOfMeasure" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="WarehouseOperations" EntityType="Self.WarehouseOperations" />
+          <EntitySet Name="WarehouseZones" EntityType="Self.WarehouseZones" />
+          <AssociationSet Name="FK__Users__Departmen__5BE2A6F2" Association="Self.FK__Users__Departmen__5BE2A6F2">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Recip__01142BA1" Association="Self.FK__Warehouse__Recip__01142BA1">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reagents__Hazard__656C112C" Association="Self.FK__Reagents__Hazard__656C112C">
+            <End Role="HazardClasses" EntitySet="HazardClasses" />
+            <End Role="Reagents" EntitySet="Reagents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReagentBa__Locat__76969D2E" Association="Self.FK__ReagentBa__Locat__76969D2E">
+            <End Role="StorageLocations" EntitySet="StorageLocations" />
+            <End Role="ReagentBatches" EntitySet="ReagentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReagentBa__Reage__74AE54BC" Association="Self.FK__ReagentBa__Reage__74AE54BC">
+            <End Role="Reagents" EntitySet="Reagents" />
+            <End Role="ReagentBatches" EntitySet="ReagentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReagentBa__Suppl__75A278F5" Association="Self.FK__ReagentBa__Suppl__75A278F5">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="ReagentBatches" EntitySet="ReagentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Batch__7B5B524B" Association="Self.FK__Warehouse__Batch__7B5B524B">
+            <End Role="ReagentBatches" EntitySet="ReagentBatches" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reagents__TypeID__6477ECF3" Association="Self.FK__Reagents__TypeID__6477ECF3">
+            <End Role="ReagentTypes" EntitySet="ReagentTypes" />
+            <End Role="Reagents" EntitySet="Reagents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reagents__UnitID__66603565" Association="Self.FK__Reagents__UnitID__66603565">
+            <End Role="UnitsOfMeasure" EntitySet="UnitsOfMeasure" />
+            <End Role="Reagents" EntitySet="Reagents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Reage__7C4F7684" Association="Self.FK__Warehouse__Reage__7C4F7684">
+            <End Role="Reagents" EntitySet="Reagents" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StorageLo__ZoneI__6FE99F9F" Association="Self.FK__StorageLo__ZoneI__6FE99F9F">
+            <End Role="WarehouseZones" EntitySet="WarehouseZones" />
+            <End Role="StorageLocations" EntitySet="StorageLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__FromL__7E37BEF6" Association="Self.FK__Warehouse__FromL__7E37BEF6">
+            <End Role="StorageLocations" EntitySet="StorageLocations" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__ToLoc__7F2BE32F" Association="Self.FK__Warehouse__ToLoc__7F2BE32F">
+            <End Role="StorageLocations" EntitySet="StorageLocations" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__UnitI__7D439ABD" Association="Self.FK__Warehouse__UnitI__7D439ABD">
+            <End Role="UnitsOfMeasure" EntitySet="UnitsOfMeasure" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__5AEE82B9" Association="Self.FK__Users__RoleID__5AEE82B9">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Perfo__00200768" Association="Self.FK__Warehouse__Perfo__00200768">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="WarehouseOperations" EntitySet="WarehouseOperations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ChemicalWarehouseDBModelContainer" CdmEntityContainer="ChemicalWarehouseDBEntities3">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.Departments">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HazardClasses">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.HazardClasses">
+              <MappingFragment StoreEntitySet="HazardClasses">
+                <ScalarProperty Name="HazardClassID" ColumnName="HazardClassID" />
+                <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PrecautionaryMeasures" ColumnName="PrecautionaryMeasures" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReagentBatches">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.ReagentBatches">
+              <MappingFragment StoreEntitySet="ReagentBatches">
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="ReagentID" ColumnName="ReagentID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+                <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
+                <ScalarProperty Name="InitialQuantity" ColumnName="InitialQuantity" />
+                <ScalarProperty Name="CurrentQuantity" ColumnName="CurrentQuantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reagents">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.Reagents">
+              <MappingFragment StoreEntitySet="Reagents">
+                <ScalarProperty Name="ReagentID" ColumnName="ReagentID" />
+                <ScalarProperty Name="ReagentCode" ColumnName="ReagentCode" />
+                <ScalarProperty Name="ReagentName" ColumnName="ReagentName" />
+                <ScalarProperty Name="ChemicalFormula" ColumnName="ChemicalFormula" />
+                <ScalarProperty Name="CASNumber" ColumnName="CASNumber" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="HazardClassID" ColumnName="HazardClassID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="MinStockLevel" ColumnName="MinStockLevel" />
+                <ScalarProperty Name="MaxStockLevel" ColumnName="MaxStockLevel" />
+                <ScalarProperty Name="StorageTemperature" ColumnName="StorageTemperature" />
+                <ScalarProperty Name="StorageConditions" ColumnName="StorageConditions" />
+                <ScalarProperty Name="IncompatibleWith" ColumnName="IncompatibleWith" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReagentTypes">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.ReagentTypes">
+              <MappingFragment StoreEntitySet="ReagentTypes">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StorageRequirements" ColumnName="StorageRequirements" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageLocations">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.StorageLocations">
+              <MappingFragment StoreEntitySet="StorageLocations">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
+                <ScalarProperty Name="ShelfNumber" ColumnName="ShelfNumber" />
+                <ScalarProperty Name="CellNumber" ColumnName="CellNumber" />
+                <ScalarProperty Name="MaxWeight" ColumnName="MaxWeight" />
+                <ScalarProperty Name="MaxVolume" ColumnName="MaxVolume" />
+                <ScalarProperty Name="IsOccupied" ColumnName="IsOccupied" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.Suppliers">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="KPP" ColumnName="KPP" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitsOfMeasure">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.UnitsOfMeasure">
+              <MappingFragment StoreEntitySet="UnitsOfMeasure">
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="UnitSymbol" ColumnName="UnitSymbol" />
+                <ScalarProperty Name="IsBaseUnit" ColumnName="IsBaseUnit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.UserRoles">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarehouseOperations">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.WarehouseOperations">
+              <MappingFragment StoreEntitySet="WarehouseOperations">
+                <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+                <ScalarProperty Name="OperationType" ColumnName="OperationType" />
+                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="ReagentID" ColumnName="ReagentID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="FromLocationID" ColumnName="FromLocationID" />
+                <ScalarProperty Name="ToLocationID" ColumnName="ToLocationID" />
+                <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+                <ScalarProperty Name="PerformedBy" ColumnName="PerformedBy" />
+                <ScalarProperty Name="RecipientDepartmentID" ColumnName="RecipientDepartmentID" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarehouseZones">
+            <EntityTypeMapping TypeName="ChemicalWarehouseDBModel.WarehouseZones">
+              <MappingFragment StoreEntitySet="WarehouseZones">
+                <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
+                <ScalarProperty Name="ZoneCode" ColumnName="ZoneCode" />
+                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TemperatureControl" ColumnName="TemperatureControl" />
+                <ScalarProperty Name="MinTemperature" ColumnName="MinTemperature" />
+                <ScalarProperty Name="MaxTemperature" ColumnName="MaxTemperature" />
+                <ScalarProperty Name="HumidityControl" ColumnName="HumidityControl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,87 @@
+﻿<Page x:Class="ChemicalWarehouseWPF.Views.StockView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Остатки"
+      Background="#F5F5F5">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Margin="0,0,0,15">
+            <Border Width="140" Height="70" Background="White" CornerRadius="8" Margin="0,0,8,8" Padding="8">
+                <StackPanel>
+                    <TextBlock Text="Всего" Foreground="#666" FontSize="10"/>
+                    <TextBlock x:Name="txtTotalItems" Text="0" Foreground="#2A6F97" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+            <Border Width="140" Height="70" Background="White" CornerRadius="8" Margin="0,0,8,8" Padding="8">
+                <StackPanel>
+                    <TextBlock Text="Кол-во" Foreground="#666" FontSize="10"/>
+                    <TextBlock x:Name="txtTotalQuantity" Text="0" Foreground="#2A6F97" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+            <Border Width="140" Height="70" Background="#E8F5E9" CornerRadius="8" Margin="0,0,8,8" Padding="8">
+                <StackPanel>
+                    <TextBlock Text="Норма" Foreground="#4CAF50" FontSize="10" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtNormal" Text="0" Foreground="#4CAF50" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+            <Border Width="140" Height="70" Background="#FFF3E0" CornerRadius="8" Margin="0,0,8,8" Padding="8">
+                <StackPanel>
+                    <TextBlock Text="Истекают" Foreground="#FF9800" FontSize="10" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtLowStock" Text="0" Foreground="#FF9800" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+            <Border Width="140" Height="70" Background="#FFEBEE" CornerRadius="8" Margin="0,0,8,8" Padding="8">
+                <StackPanel>
+                    <TextBlock Text="Просрочка" Foreground="#F44336" FontSize="10" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtExpired" Text="0" Foreground="#F44336" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+            <Border Width="140" Height="70" Background="#F5F5F5" CornerRadius="8" Margin="0,0,8,8" Padding="8">
+                <StackPanel>
+                    <TextBlock Text="Закончилось" Foreground="#9E9E9E" FontSize="10" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtFinished" Text="0" Foreground="#9E9E9E" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+        </WrapPanel>
+        <DataGrid Grid.Row="1" x:Name="dgStock" AutoGenerateColumns="False" IsReadOnly="True"
+                  Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Реагент" Binding="{Binding ReagentName}" Width="150"/>
+                <DataGridTextColumn Header="Партия" Binding="{Binding BatchNumber}" Width="100"/>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding CurrentQuantity}" Width="70"/>
+                <DataGridTextColumn Header="Ед." Binding="{Binding UnitSymbol}" Width="50"/>
+                <DataGridTextColumn Header="Место" Binding="{Binding LocationCode}" Width="80"/>
+                <DataGridTextColumn Header="Срок" Binding="{Binding ExpirationDate, StringFormat=dd.MM.yyyy}" Width="90"/>
+                <DataGridTemplateColumn Header="Статус" Width="90">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="12" Padding="8,3">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="#4CAF50"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Status}" Value="Просрочено">
+                                                <Setter Property="Background" Value="#F44336"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Status}" Value="Истекает">
+                                                <Setter Property="Background" Value="#FF9800"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Status}" Value="Закончилось">
+                                                <Setter Property="Background" Value="#9E9E9E"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <TextBlock Text="{Binding Status}" Foreground="White" FontSize="11" 
+                                           FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

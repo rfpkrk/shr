@@ -1,0 +1,45 @@
+﻿<Page x:Class="ChemicalWarehouseWPF.Views.ReagentsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Реагенты"
+      Background="#F5F5F5">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="btnAdd" Content="Добавить" Width="100" Height="35" 
+                    Background="#2A6F97" Foreground="White" BorderThickness="0" Click="BtnAdd_Click"/>
+            <Button x:Name="btnEdit" Content="Изменить" Width="100" Height="35" 
+                    Background="#F0F3F5" Foreground="#2A6F97" BorderBrush="#2A6F97" BorderThickness="1"
+                    Margin="10,0" IsEnabled="False" Click="BtnEdit_Click"/>
+            <Button x:Name="btnDelete" Content="Удалить" Width="100" Height="35" 
+                    Background="#F0F3F5" Foreground="#2A6F97" BorderBrush="#2A6F97" BorderThickness="1"
+                    IsEnabled="False" Click="BtnDelete_Click"/>
+            <Button Content="Обновить" Width="100" Height="35" Background="#F0F3F5" Foreground="#2A6F97" 
+                    BorderBrush="#2A6F97" BorderThickness="1" Margin="10,0,0,0" Click="BtnRefresh_Click"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" x:Name="dgReagents" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionChanged="DgReagents_SelectionChanged"
+                  MouseDoubleClick="DgReagents_MouseDoubleClick"
+                  Background="White" BorderBrush="#E0E0E0" BorderThickness="1" Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Код" Binding="{Binding ReagentCode}" Width="80"/>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding ReagentName}" Width="150"/>
+                <DataGridTextColumn Header="Формула" Binding="{Binding ChemicalFormula}" Width="80"/>
+                <DataGridTextColumn Header="CAS" Binding="{Binding CASNumber}" Width="100"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding TypeName}" Width="100"/>
+                <DataGridTextColumn Header="Класс" Binding="{Binding HazardClass}" Width="100"/>
+                <DataGridTextColumn Header="Ед." Binding="{Binding UnitSymbol}" Width="50"/>
+                <DataGridTextColumn Header="Мин" Binding="{Binding MinStockLevel}" Width="50"/>
+                <DataGridTextColumn Header="Макс" Binding="{Binding MaxStockLevel}" Width="50"/>
+                <DataGridCheckBoxColumn Header="Активен" Binding="{Binding IsActive}" Width="70"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock x:Name="txtStatus" Grid.Row="2" Text="Готов" Foreground="#666"/>
+        <TextBlock x:Name="txtCount" Grid.Row="2" Text="0" Foreground="#2A6F97" 
+                   HorizontalAlignment="Right" Margin="0,0,50,0"/>
+    </Grid>
+</Page>

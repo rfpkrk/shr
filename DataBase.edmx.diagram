@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0114b9b7244e4cd1b496cc6e77b99382" Name="Diagram1">
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.Departments" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.HazardClasses" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.ReagentBatches" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.Reagents" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.ReagentTypes" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.StorageLocations" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.Suppliers" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.UnitsOfMeasure" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.UserRoles" Width="1.5" PointX="3" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.Users" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.WarehouseOperations" Width="1.5" PointX="7.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChemicalWarehouseDBModel.WarehouseZones" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Users__Departmen__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Warehouse__Recip__01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Reagents__Hazard__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__ReagentBa__Locat__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__ReagentBa__Reage__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__ReagentBa__Suppl__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Warehouse__Batch__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Reagents__TypeID__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Reagents__UnitID__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Warehouse__Reage__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__StorageLo__ZoneI__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Warehouse__FromL__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Warehouse__ToLoc__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Warehouse__UnitI__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Users__RoleID__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="ChemicalWarehouseDBModel.FK__Warehouse__Perfo__00200768" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
